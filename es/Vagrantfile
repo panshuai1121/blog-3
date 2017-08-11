@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
 
 
 
-    yum install -y net-tools wget tree 
+    yum install -y net-tools wget tree unzip
     #install jdk
     echo "192.168.31.185 soft.home" >> /etc/hosts
     mkdir /root/soft
