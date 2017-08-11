@@ -1,13 +1,13 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "centos/7"
   config.vm.network "public_network", auto_config: false, bridge: "en1: Wi-Fi (AirPort)"
+  config.vm.provider :virtualbox do |vb|
+    vb.memory = 1024
+    vb.cpus = 1
+  end
+
   config.vm.provision "shell", inline: <<-SHELL
     #install base soft
-
- #   cp /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
- #   cp /vagrant/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo
-
-
 
     yum install -y net-tools wget tree unzip
     #install jdk
@@ -51,8 +51,8 @@ Vagrant.configure("2") do |config|
       cd /home/elasticsearch
       wget http://soft.home/elasticsearch-5.5.1.zip
       unzip elasticsearch-5.5.1.zip
-      sed -i 's/-Xms2g/-Xms256m/' /home/elasticsearch/elasticsearch-5.5.1/config/jvm.options
-      sed -i 's/-Xmx2g/-Xmx256m/' /home/elasticsearch/elasticsearch-5.5.1/config/jvm.options
+      sed -i 's/-Xms2g/-Xms512m/' /home/elasticsearch/elasticsearch-5.5.1/config/jvm.options
+      sed -i 's/-Xmx2g/-Xmx512m/' /home/elasticsearch/elasticsearch-5.5.1/config/jvm.options
       mv /home/elasticsearch/elasticsearch-5.5.1/config/elasticsearch.yml /home/elasticsearch/elasticsearch-5.5.1/config/elasticsearch.yml.bak
       cp /vagrant/elasticsearch_master.yml /home/elasticsearch/elasticsearch-5.5.1/config/elasticsearch.yml
       chown -R elasticsearch:elasticsearch /home/elasticsearch
