@@ -8,7 +8,10 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "shell", inline: <<-SHELL
     #install base soft
-
+    mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+    cp /vagrant/CentOS7-Base-163.repo /etc/yum.repos.d/CentOS-Base.repo
+    yum clean all
+    yum makecache
     yum install -y net-tools wget tree unzip
     #install jdk
     echo "192.168.31.185 soft.home" >> /etc/hosts
