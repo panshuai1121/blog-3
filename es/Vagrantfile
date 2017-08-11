@@ -45,11 +45,17 @@ Vagrant.configure("2") do |config|
   config.vm.define "hadoop_master" do |es_master|
     #download hadoop
     es_master.vm.provision "shell",inline:<<-SHELL
+      groupadd elasticsearch
+      useradd elasticsearch -g elsearch -p elasticsearch
       mkdir -p /home/elasticsearch
       cd /home/elasticsearch
       wget http://soft.home/elasticsearch-5.5.1.zip
       unzip elasticsearch-5.5.1.zip
-
+      sed -i 's/-Xms2g/-Xms256m/' /home/elasticsearch/elasticsearch-5.5.1/config/jvm.options
+      sed -i 's/-Xmx2g/-Xmx256m/' /home/elasticsearch/elasticsearch-5.5.1/config/jvm.options
+      mv /home/elasticsearch/elasticsearch-5.5.1/config/elasticsearch.yml /home/elasticsearch/elasticsearch-5.5.1/config/elasticsearch.yml.bak
+      cp /vagrant/elasticsearch_master.yml /home/elasticsearch/elasticsearch-5.5.1/config/elasticsearch.yml
+      chown -R elasticsearch:elasticsearch /home/elasticsearch
     SHELL
     #config network
     es_master.vm.provision "shell",run: "always",inline:<<-SHELL
@@ -58,14 +64,25 @@ Vagrant.configure("2") do |config|
     SHELL
   end
 
-  #config.vm.define "hadoop_node1" do |es_node1|
-  #  es_node1.vm.provision "shell",inline:<<-SHELL
-  #    systemctl stop firewalld.service
-  #  SHELL
-  #  es_node1.vm.provision "shell",run: "always",inline:<<-SHELL
-  #    ifconfig eth1 192.168.31.141 netmask 255.255.255.0 up
-  #  SHELL
-  #end
+#  config.vm.define "hadoop_node1" do |es_node1|
+#    es_node1.vm.provision "shell",inline:<<-SHELL
+#     groupadd elasticsearch
+#      useradd elasticsearch -g elsearch -p elasticsearch
+#      mkdir -p /home/elasticsearch
+#      cd /home/elasticsearch
+#      wget http://soft.home/elasticsearch-5.5.1.zip
+#      unzip elasticsearch-5.5.1.zip
+#      sed -i 's/-Xms2g/-Xms256m/' /home/elasticsearch/elasticsearch-5.5.1/config/jvm.options
+#      sed -i 's/-Xmx2g/-Xmx256m/' /home/elasticsearch/elasticsearch-5.5.1/config/jvm.options
+#      mv /home/elasticsearch/elasticsearch-5.5.1/config/elasticsearch.yml /home/elasticsearch/elasticsearch-5.5.1/config/elasticsearch.yml.bak
+#      cp /vagrant/elasticsearch_node1.yml /home/elasticsearch/elasticsearch-5.5.1/config/elasticsearch.yml
+#      chown -R elasticsearch:elasticsearch /home/elasticsearch
+#    SHELL
+#    es_node1.vm.provision "shell",run: "always",inline:<<-SHELL
+#      systemctl stop firewalld.service
+#      ifconfig eth1 192.168.31.141 netmask 255.255.255.0 up
+#    SHELL
+#  end
 
 
 end

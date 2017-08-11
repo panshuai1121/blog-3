@@ -1,0 +1,12 @@
+cluster.name: home-application
+node.name: home-es-master
+
+network.host: 192.168.31.142
+http.port: 9200
+
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+
+node.master: true
+node.data: true
+discovery.zen.ping.unicast.hosts: ["192.168.31.140"]
