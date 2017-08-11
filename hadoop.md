@@ -41,8 +41,8 @@
       config.vm.network "public_network", auto_config: false, bridge: "en1: Wi-Fi (AirPort)"
       config.vm.provision "shell", inline: <<-SHELL
         #install base soft
-        cp /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
-        cp /vagrant/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo
+        #cp /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.bak
+        #cp /vagrant/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo
         
         yum install -y net-tools wget tree 
         #install jdk
@@ -249,6 +249,6 @@
     
 # 3.安装hadoop
 
-    ssh root@192.168.31.131 echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCk3psyWKpCZaQ6BzaBlqde4Qq1L9gMTfgTE5Zc4q9YoaNSGf4WMLY88EeMScBu8lRytL/1+/yVKtRGz/7XdPt+mwTun43NEm5F0guI3SDX2vItvXmdEtQxnPM0rZIpu4XR0wZNsLdnyL2IaEMg9XLG+bfaFkwxZwajaKQDoRAL4Q7X7WPgPJoxsuUO4W9Lo9BTB9doNSux53BX3kNRYvsghwOg3uBOxlfRWPuDZOw2VinELPmdEiRP6FK5Lmi9qlvKwqKFCbqqrs2U2mAuH5piuSTjvJL97w2rSW2N7kS5cwH9sGKhwfdNeqACjBA814o3ZP9uYmYwEQSfwCWXQgod root@localhost.localdomain" >> /root/.ssh/authorized_keys
+    ssh root@192.168.31.131 echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDO4kf+k3j0wwifKhC/lg2dTjXC8H3ktpn70srJAga5J5DUkKtcXvOpJRz8bsZEqKDZKLqSJ36ZRDCB5ZxOYJe0tJZBrmc7eLLLAinDvP1JjtB7MUDZP6wKntIIkj88aWiGJcqOdVv/o9yxIGzkZj8AFeORxyHu3Re0rYnzAO6OlSx+WZUfetYwub+GrsYwtSX3mvQW8oq2tumY8mSXJ4GKF8WWtypllYbRXDK4W1+N63z+yR0hqRz/G/v53uOEDEF37i9FMa4/Mtc2H83Y92OR3KegZMpi1ma9po98gid0Ey2VU+H/LGNIgN1eD17DGjZZ/0DkyWLQBnYzTjpc22Gl root@localhost.localdomain" >> /root/.ssh/authorized_keys
     
 
