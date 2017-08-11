@@ -39,53 +39,33 @@ Vagrant.configure("2") do |config|
     ssh-keygen -t rsa -P "" -f /root/.ssh/id_rsa
     cat /root/.ssh/id_rsa.pub >> /root/.ssh/authorized_keys 
 
-  #  echo '192.168.31.130 hadoop_master' >> /etc/hosts 
-  #  echo '192.168.31.131 hadoop_node1' >> /etc/hosts 
-  #  echo '192.168.31.132 hadoop_node2' >> /etc/hosts  
 
   SHELL
 
-  config.vm.define "hadoop_master" do |hadoop_master|
+  config.vm.define "hadoop_master" do |es_master|
     #download hadoop
-    hadoop_master.vm.provision "shell",inline:<<-SHELL
-      mkdir -p /home/hadoop/tmp
-      mkdir -p /home/hadoop/hdfs/data
-      mkdir -p /home/hadoop/hdfs/name
-      cd /home/hadoop
-      wget http://soft.home/hadoop-2.8.1.tar.gz
-      tar zvxf hadoop-2.8.1.tar.gz
-      cd /home/hadoop/hadoop-2.8.1/etc/hadoop
-      sed -i 's/export JAVA_HOME=${JAVA_HOME}/export JAVA_HOME=\/usr\/java\/jdk1.8.0_144/' hadoop-env.sh
-      mv core-site.xml core-site.xml.bak
-      mv hdfs-site.xml hdfs-site.xml.bak
-      mv slaves slaves.bak
-      cp /vagrant/slaves .
-      cp /vagrant/*.xml . 
-      systemctl stop firewalld.service
-   #   hostnamectl set-hostname hadoop_master
-    SHELL
+    es_master.vm.provision "shell",inline:<<-SHELL
+      mkdir -p /home/elasticsearch
+      cd /home/elasticsearch
+      wget http://soft.home/elasticsearch-5.5.1.zip
+      unzip elasticsearch-5.5.1.zip
 
+    SHELL
     #config network
-    hadoop_master.vm.provision "shell",run: "always",inline:<<-SHELL
-      ifconfig eth1 192.168.31.130 netmask 255.255.255.0 up
+    es_master.vm.provision "shell",run: "always",inline:<<-SHELL
+      systemctl stop firewalld.service
+      ifconfig eth1 192.168.31.140 netmask 255.255.255.0 up
     SHELL
   end
 
-  config.vm.define "hadoop_node1" do |hadoop_node1|
-    hadoop_node1.vm.provision "shell",inline:<<-SHELL
-    #  hostnamectl set-hostname hadoop_node1
-    SHELL
-    hadoop_node1.vm.provision "shell",run: "always",inline:<<-SHELL
-      ifconfig eth1 192.168.31.131 netmask 255.255.255.0 up
-    SHELL
-  end
+  #config.vm.define "hadoop_node1" do |es_node1|
+  #  es_node1.vm.provision "shell",inline:<<-SHELL
+  #    systemctl stop firewalld.service
+  #  SHELL
+  #  es_node1.vm.provision "shell",run: "always",inline:<<-SHELL
+  #    ifconfig eth1 192.168.31.141 netmask 255.255.255.0 up
+  #  SHELL
+  #end
 
-#  config.vm.define "hadoop_node2" do |hadoop_node2|
-#    hadoop_node2.vm.provision "shell",inline:<<-SHELL
-#     # hostnamectl set-hostname hadoop_node2
-#    SHELL
-#    hadoop_node2.vm.provision "shell",run: "always",inline:<<-SHELL
-#      ifconfig eth1 192.168.31.132 netmask 255.255.255.0 up
-#    SHELL
-#  end
+
 end
