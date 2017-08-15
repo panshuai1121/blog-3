@@ -1,7 +1,7 @@
 cluster.name: home-application
 node.name: home-es-master
 
-network.host: 192.168.31.140
+network.host: 192.168.31.141
 http.port: 9200
 
 http.cors.enabled: true
