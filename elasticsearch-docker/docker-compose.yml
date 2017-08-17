@@ -17,4 +17,4 @@ services:
      - "9200"
      - "9300"  
     links:
-      - elasticsearch-master:elasticsearch-master
+      - master:elasticsearch-master
