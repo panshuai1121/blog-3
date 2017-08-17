@@ -4,4 +4,3 @@ services:
     image: mobz/elasticsearch-head:5
     ports:
      - "9001:9001"
-
