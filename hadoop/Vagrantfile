@@ -39,7 +39,6 @@ Vagrant.configure("2") do |config|
   #  echo '192.168.31.130 hadoop_master' >> /etc/hosts 
   #  echo '192.168.31.131 hadoop_node1' >> /etc/hosts 
   #  echo '192.168.31.132 hadoop_node2' >> /etc/hosts  
-
   SHELL
 
   config.vm.define "hadoop_master" do |hadoop_master|
