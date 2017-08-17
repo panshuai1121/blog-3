@@ -1,34 +1,20 @@
 version: '3'
 services:
-  elasticsearch-master:
+  master:
     image: elasticsearch:5
     volumes:
      - ./es_master:/usr/share/elasticsearch/config
     ports:
      - "9200:9200"
-
-  elasticsearch-node1:
+    expose:
+     - "9200"
+     - "9300" 
+  node1:
     image: elasticsearch:5
-    depends_on:
-      - elasticsearch-master
     volumes:
      - ./es_node1:/usr/share/elasticsearch/config
+    expose:
+     - "9200"
+     - "9300"  
     links:
-     - elasticsearch-master:elasticsearch-master
-
-  elasticsearch-head:
-    image: mobz/elasticsearch-head:5
-    depends_on:
-      - elasticsearch-master
-      - elasticsearch-node1
-    ports:
-     - "9100:9100"
-#  kibana:
-#    image: kibana
-#    depends_on:
-#      - elasticsearch-master
-#      - elasticsearch-node1
-#    ports:
-#     - 5601:5601
-#    links:
-#     - elasticsearch-master:elasticsearch
+      - elasticsearch-master:elasticsearch-master
