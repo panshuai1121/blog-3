@@ -1,0 +1,14 @@
+cluster.name: docker-application
+
+node.name: node1
+node.master: true
+node.data: true
+
+http.host: 0.0.0.0
+http.port: 9200
+transport.tcp.port: 9300 
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+
+discovery.zen.minimum_master_nodes: 1
+discovery.zen.ping.unicast.hosts: ["localhost:9200"]

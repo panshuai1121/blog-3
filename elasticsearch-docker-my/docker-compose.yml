@@ -1,0 +1,25 @@
+version: '3'
+services:
+  master:
+    build: 
+      context: .
+    volumes:
+     - ./config/master.yml:/home/elasticsearch/elasticsearch-5.5.1/config/elasticsearch.yml
+    ports:
+     - "9200:9200"
+  node1:
+    build: 
+      context: .
+    volumes:
+     - ./config/node1.yml:/home/elasticsearch/elasticsearch-5.5.1/config/elasticsearch.yml
+    links:
+      - master:elasticsearch-master     
+  node2:
+    build: 
+      context: .
+      dockerfile: Dockerfile_debug
+    volumes:
+     - ./config/node2.yml:/home/elasticsearch/elasticsearch-5.5.1/config/elasticsearch.yml
+    links:
+      - master:elasticsearch-master     
+        
