@@ -1,0 +1,1 @@
+{"virtualbox":{"/data":{"owner":"root","group":"root","guestpath":"/data","hostpath":"/Users/umeng/blog/elasticsearch-vagrant/data/master","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/umeng/blog/elasticsearch-vagrant","disabled":false,"__vagrantfile":true}}}
