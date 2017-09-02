@@ -1,6 +1,6 @@
 version: '3'
 services:
-  elasticsearch-head:
-    image: mobz/elasticsearch-head:5
+  elasticsearch-elastichq:
+    image: geertvb/elastichq
     ports:
-     - "9100:9100"
+     - "9201:80"
