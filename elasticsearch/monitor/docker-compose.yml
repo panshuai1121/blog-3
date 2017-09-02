@@ -4,3 +4,7 @@ services:
     image: geertvb/elastichq
     ports:
      - "9201:80"
+  # elasticsearch-head:
+  #   image: mobz/elasticsearch-head:5
+  #   ports:
+  #    - "9100:9100"

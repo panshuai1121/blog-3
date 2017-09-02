@@ -6,15 +6,9 @@ services:
      - ./es_master:/usr/share/elasticsearch/config
     ports:
      - "9200:9200"
-    expose:
-     - "9200"
-     - "9300" 
   node1:
     image: elasticsearch:5
     volumes:
      - ./es_node1:/usr/share/elasticsearch/config
-    expose:
-     - "9200"
-     - "9300"  
     links:
       - master:elasticsearch-master

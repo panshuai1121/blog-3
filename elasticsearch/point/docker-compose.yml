@@ -1,0 +1,10 @@
+version: '3'
+services:
+  es_point:
+    image: elasticsearch:5
+    volumes:
+     - ./conf:/usr/share/elasticsearch/config
+    #  - ./data:/usr/share/ear/data
+    ports:
+     - "9200:9200"
+     - "9300:9300"

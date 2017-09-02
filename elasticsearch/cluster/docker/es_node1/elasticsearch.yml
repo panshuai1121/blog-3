@@ -3,6 +3,7 @@ http.host: 0.0.0.0
 http.port: 9200
 http.cors.enabled: true
 http.cors.allow-origin: "*"
-node.master: true
+node.master: false
 node.data: true
-discovery.zen.ping.unicast.hosts: ["127.0.0.1"]
+network.host: 0.0.0.0
+discovery.zen.ping.unicast.hosts: ["elasticsearch-master"]
