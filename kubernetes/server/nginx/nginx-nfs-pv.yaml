@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-nginx-pv
+spec:
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteMany
+  mountOptions:
+    - vers=3
+  nfs:
+    server: 192.168.99.1
+    path: "/Users/k8s-data/mysql"

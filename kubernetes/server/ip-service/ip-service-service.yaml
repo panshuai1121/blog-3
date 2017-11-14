@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: ip-services-service
+spec:
+  selector:
+    app: ip-service
+  type: NodePort
+  ports:
+  - name: ip-service-8080
+    protocol: TCP
+    port: 8080
+    nodePort: 30010

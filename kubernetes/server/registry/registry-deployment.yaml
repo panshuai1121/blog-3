@@ -1,0 +1,24 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: registry-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: registry
+    spec:
+      containers:
+      - name: registry
+        image: registry
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+        - mountPath: "/var/lib/registry"
+          name: registry-volume
+          readOnly: false
+      volumes:
+      - name: registry-volume
+        hostPath:
+         path: /Users/k8s-data/registry/data

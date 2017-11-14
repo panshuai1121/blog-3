@@ -1,0 +1,16 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: ip-service-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ip-service
+    spec:
+      containers:
+      - name: ip-service
+        image: d1studio/ip-service:0.0.1
+        ports:
+        - containerPort: 8080
