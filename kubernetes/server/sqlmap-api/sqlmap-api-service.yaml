@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: sqlmap-api-service
+spec:
+  selector:
+    app: sqlmap-api
+  type: NodePort
+  ports:
+  - name: sqlmap-api-80
+    protocol: TCP
+    port: 80
+    nodePort: 30011

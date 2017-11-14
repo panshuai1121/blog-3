@@ -1,0 +1,16 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: sqlmap-api-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: sqlmap-api
+    spec:
+      containers:
+      - name: sqlmap-api
+        image: d1studio/sqlmapapi
+        ports:
+        - containerPort: 80
