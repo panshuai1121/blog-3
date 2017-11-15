@@ -1,0 +1,23 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: zookeeper-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: zookeeper
+    spec:
+      containers:
+      - name: zookeeper
+        image: zookeeper
+        ports:
+        - containerPort: 2181
+      - name: zkui
+        image: maauso/zkui
+        env:
+        - name: ZKLIST
+          value: "localhost:2181"
+        ports:
+        - containerPort: 9090  
