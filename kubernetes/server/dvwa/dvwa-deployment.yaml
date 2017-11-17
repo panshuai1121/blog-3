@@ -1,0 +1,16 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: dvwa-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dvwa
+    spec:
+      containers:
+      - name: dvwa
+        image: citizenstig/dvwa
+        ports:
+        - containerPort: 80

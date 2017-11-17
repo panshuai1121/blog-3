@@ -1,0 +1,25 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: log-monitor
+spec:
+  selector:
+    app: log-monitor
+  type: NodePort
+  ports:
+  - name: log-monitor-9200
+    protocol: TCP
+    port: 9200
+    nodePort: 30031
+  - name: log-monitor-9300
+    protocol: TCP
+    port: 9300
+    nodePort: 30032
+  - name: log-monitor-5601
+    protocol: TCP
+    port: 5601
+    nodePort: 30033
+  - name: log-monitor-3000
+    protocol: TCP
+    port: 3000
+    nodePort: 30034

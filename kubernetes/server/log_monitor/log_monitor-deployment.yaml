@@ -1,0 +1,43 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: log-monitor-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: log-monitor
+    spec:
+      containers:
+      # - name: grafana
+      #   image: grafana/grafana
+      #   ports:
+      #   - containerPort: 3000
+      #   volumeMounts:
+      #   - mountPath: "/var/lib/grafana"
+      #     name: grafana-volume
+      #     readOnly: false
+      - name: elasticsearch
+        image: elasticsearch:5
+        ports:
+        - containerPort: 9200  
+        - containerPort: 9300  
+        # volumeMounts:
+        # - mountPath: "/usr/share/elasticsearch/data"
+        #   name: elasticsearch-volume
+        #   readOnly: false
+      - name: kibana
+        image: kibana:5
+        env:
+        - name: ELASTICSEARCH_URL
+          value: "locahost:9200"        
+        ports:
+        - containerPort: 5601
+      volumes:
+      - name: elasticsearch-volume
+        hostPath:
+         path: /Users/k8s-data/elasticsearch
+      - name: grafana-volume
+        hostPath:
+         path: /Users/k8s-data/grafana   

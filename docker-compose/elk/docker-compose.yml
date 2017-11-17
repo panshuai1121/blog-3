@@ -1,0 +1,23 @@
+version: '3'
+services:
+  php-app:
+    image: logstash
+    ports:
+     - "8002:80"
+     - "9001:9000"
+    volumes:
+     - ./nginx.conf:/etc/nginx/sites-enabled/default
+     - ./:/var/www/html/
+  elasticsearch:
+    image: elasticsearch:latest
+    ports:
+     - "9300:9300"
+     - "9200:9200"
+    volumes:
+     - ./data:/usr/share/elasticsearch/data
+  kibana:
+    image: kibana
+    ports:
+     - "5601:5601"
+    environment:
+     - ELASTICSEARCH_URL=http://elasticsearch:9200     
