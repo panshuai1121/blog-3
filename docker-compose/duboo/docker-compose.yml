@@ -1,0 +1,12 @@
+version: '2'
+services:
+  zookeeper-app:
+    image: zookeeper
+    ports:
+     - "2181:2181"
+  dubbo-admin-app:
+    image: lemonguge/dubbo-admin
+    ports:
+     - "8777:8080"
+    links:
+     - "zookeeper-app:zk"

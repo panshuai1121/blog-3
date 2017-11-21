@@ -14,3 +14,9 @@ spec:
         image: nginx
         ports:
         - containerPort: 80
+
+
+
+
+
+docker run -d --name dubbo-admin -p 8777:8080 -e DUBBO_REGISTRY="30.30.142.106:\/\/zk:2181" riveryang/dubbo-admin
